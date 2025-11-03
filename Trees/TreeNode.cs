@@ -63,13 +63,11 @@ namespace Trees
             {
                 return 0;
             }
-            int altura = 1;
             if (this.Children != null)
             {
-                altura++;
+                return (1 + Children.Height());
             }
-            return (altura + Children.Height());
-            
+            return 0;   
         }
 
         public void Remove(T value)
