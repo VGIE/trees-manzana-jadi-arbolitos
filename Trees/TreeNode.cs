@@ -18,7 +18,7 @@ namespace Trees
 
         }
 
-    /*    public string ToString(int depth, int index)
+        public string ToString(int depth, int index)
         {
             //TODO #3: Uncomment the code below
             
@@ -31,13 +31,13 @@ namespace Trees
 
             for (int childIndex = 0; childIndex < Children.Count(); childIndex++)
             {
-                TreeNode<T> child = Children.Get(childIndex);
-                output += child.ToString(depth + 1, childIndex);
+            //    TreeNode<T> child = Children.Get(childIndex);
+            //    output += child.ToString(depth + 1, childIndex);
             }
             return output;
 
         }
-    */
+  
         public TreeNode<T> Add(T value)
         {
             //TODO #4: Add a new instance of class GenericTreeNode<T> with Value=value. Return the instance we just created
