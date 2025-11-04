@@ -15,7 +15,7 @@ namespace Trees
         {
             //TODO #2: Initialize member variables/attributes
             TreeNode<T> arbol = new TreeNode<T>(value);
-
+            
         }
 
         public string ToString(int depth, int index)

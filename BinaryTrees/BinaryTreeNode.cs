@@ -49,19 +49,19 @@ namespace BinaryTrees
             //          -If the current node and the new node have the same key, just update this node's value with the new node's value
             if (Key.CompareTo(node.Key) < 0)
             {
-                if (LeftChild == null)
-                {
-                    LeftChild = node;
-                }
-                else LeftChild.Add(node);
-            }
-            if (Key.CompareTo(node.Key) > 0)
-            {
                 if (RightChild == null)
                 {
                     RightChild = node;
                 }
                 else RightChild.Add(node);
+            }
+            if (Key.CompareTo(node.Key) > 0)
+            {
+                if (LeftChild == null)
+                {
+                    LeftChild = node;
+                }
+                else LeftChild.Add(node);
             }
             if (Key.CompareTo(node.Key) == 0)
                 {
@@ -72,7 +72,23 @@ namespace BinaryTrees
         public int Count()
         {
             //TODO #3: Return the total number of elements in this tree
-            return (1 + LeftChild.Count() + RightChild.Count());
+            if (LeftChild != null && RightChild != null)
+            {
+                return (1 + LeftChild.Count() + RightChild.Count());
+            }
+            if (LeftChild == null && RightChild != null)
+            {
+                return (1 + RightChild.Count());
+            }
+            if (LeftChild != null && RightChild == null)
+            {
+                return (1 + LeftChild.Count());
+            }
+            if (LeftChild == null && RightChild == null)
+            {
+                return 1;
+            }
+            return 0;
             
         }
 
@@ -102,7 +118,7 @@ namespace BinaryTrees
                 {
                     return (1 + RightChild.Height());
                 }
-            return 1;  
+            return 0;  
             
         }
 

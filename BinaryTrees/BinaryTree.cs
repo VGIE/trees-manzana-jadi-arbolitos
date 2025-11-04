@@ -1,11 +1,13 @@
 
 using System;
+using System.Security.Cryptography;
 namespace BinaryTrees
 {
 
     public class BinaryTree<TKey, TValue> where TKey : IComparable<TKey>
     {
         public BinaryTreeNode<TKey, TValue> RootNode;
+
 
         public override string ToString()
         {
@@ -79,7 +81,21 @@ namespace BinaryTrees
             //          - Create a new tree node with the key/values in the center of the [start,end] section of the arrays
             //          - Recursive call to AddBalanced with the elements on the left of center [start,center-1]. Add the result to the new node as LeftNode
             //          - Recursive call to AddBalanced with the elements on the right of center [center+1,end]. Add the result to the new node as RightNode
-            
+           
+                int center = (start + end) / 2;
+                BinaryTreeNode<TKey, TValue> nuevo = new BinaryTreeNode<TKey, TValue>(keys[center], values[center]);
+                 
+                if (start <= center)
+            {
+                center--;
+                this.AddBalanced(keys, values, start, end);
+            }
+                center = (start + end) / 2;
+            if (end >= center)
+            {
+                center++;
+                this.Add(keys[center], values[center]);
+            }
             return null;
             
         }

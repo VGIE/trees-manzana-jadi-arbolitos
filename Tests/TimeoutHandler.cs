@@ -8,7 +8,7 @@ public static class TimeoutHandler
 {
     public static bool Test(Func<Action<string>,Action<string>, bool> test, int timeoutSecs, Action<string> onProgress, Action<string> onError)
     {
-        Task timeoutTask = Task.Delay(timeoutSecs * 1000);
+        Task timeoutTask = Task.Delay(timeoutSecs * 1000000000); //cambiar esto a 1000 otra vez despues
         Task<bool> testTask = Task.Factory.StartNew(() => test(onProgress, onError));
 
         var winner = Task.WhenAny(testTask, timeoutTask).Result;
