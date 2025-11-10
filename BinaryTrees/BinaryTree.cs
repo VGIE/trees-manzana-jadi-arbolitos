@@ -84,18 +84,20 @@ namespace BinaryTrees
            
                 int center = (start + end) / 2;
                 BinaryTreeNode<TKey, TValue> nuevo = new BinaryTreeNode<TKey, TValue>(keys[center], values[center]);
-                 
-                if (start <= center)
+            if (start <= center)
             {
-                center--;
-                this.AddBalanced(keys, values, start, end);
+                this.Add(nuevo);
+                nuevo.LeftChild = null;
             }
-                center = (start + end) / 2;
             if (end >= center)
             {
-                center++;
-                this.Add(keys[center], values[center]);
+                this.Add(nuevo);
+                nuevo.RightChild = null;
             }
+                            center++;
+                this.AddBalanced(keys, values, (center+1), end);
+                            center--;
+                this.AddBalanced(keys, values, start, (center-1));
             return null;
             
         }

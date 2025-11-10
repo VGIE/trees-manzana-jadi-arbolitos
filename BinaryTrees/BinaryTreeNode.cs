@@ -142,26 +142,26 @@ namespace BinaryTrees
             {
                 if (this.Key.CompareTo(key) > 0)
                 {
-                    LeftChild.Get(key);
+                    return LeftChild.Get(key);
                 }
                 if (this.Key.CompareTo(key) < 0)
                 {
-                    RightChild.Get(key);
+                    return RightChild.Get(key);
                 }
             }
             if (this.LeftChild == null && this.RightChild != null)
             {
-                RightChild.Get(key);
+                return RightChild.Get(key);
             }
             if (this.LeftChild != null && this.RightChild == null)
             {
-                LeftChild.Get(key);
+                return LeftChild.Get(key);
             }
             return default(TValue);  
             
         }
 
-        
+
 
         public BinaryTreeNode<TKey, TValue> Remove(TKey key)
         {
@@ -169,9 +169,50 @@ namespace BinaryTrees
             //so this method returns the node with which this node needs to be replaced. If this node isn't the
             //one we are looking for, we will return this, so that the parent node can replace LeftChild/RightChild
             //with the same node it had.
-            
+            if (this.Key.CompareTo(key) == 0)
+            {
+                if (this.LeftChild == null && this.RightChild == null)
+                {
+                    return null;
+                }
+                if (this.LeftChild == null && this.RightChild != null)
+                {
+                    return RightChild;
+                }
+                if (this.LeftChild != null && this.RightChild == null)
+                {
+                    return LeftChild;
+                }
+                if (this.LeftChild != null && this.RightChild != null)
+                {
+                    RightChild.Add(LeftChild);
+                    return RightChild;
+                }
+            }
+            else
+            {
+                if (this.LeftChild != null && this.RightChild != null)
+                {
+                    if (this.Key.CompareTo(key) > 0)
+                    {
+                        LeftChild = LeftChild.Remove(key);
+                    }
+                    if (this.Key.CompareTo(key) < 0)
+                    {
+                        RightChild = RightChild.Remove(key);
+                    }
+                }
+                if (this.LeftChild == null && this.RightChild != null)
+                {
+                    RightChild = RightChild.Remove(key);
+                }
+                if (this.LeftChild != null && this.RightChild == null)
+                {
+                    LeftChild = LeftChild.Remove(key);
+                }
+                return this;
+            }
             return null;
-            
         }
 
         public int KeysToArray(TKey[] keys, int index)
