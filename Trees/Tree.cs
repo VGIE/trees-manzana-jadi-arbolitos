@@ -9,7 +9,7 @@ namespace Trees
         {
             if (RootNode == null)
                 return null;
-            else return null;//RootNode.ToString(0, 0);
+            else return RootNode.ToString(0, 0);
         }
     }
 }

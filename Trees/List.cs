@@ -2,6 +2,7 @@ namespace Lists;
 
 //TODO #1: Copy your List<T> class (List.cs) to this project and overwrite this file.
 using Lists;
+using System;
 using System.Collections;
 
 public class ListNode<T>
@@ -144,5 +145,10 @@ public class List<T> : IList<T>
                 node = node.Next;
             }
         
+    }
+
+    internal int Height()
+    {
+        throw new NotImplementedException();
     }
 }
