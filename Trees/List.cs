@@ -146,9 +146,4 @@ public class List<T> : IList<T>
             }
         
     }
-
-    internal int Height()
-    {
-        throw new NotImplementedException();
-    }
 }

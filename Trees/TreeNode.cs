@@ -1,5 +1,6 @@
 
 using System;
+using System.Runtime.ExceptionServices;
 using System.Xml;
 using Lists;
 
@@ -56,39 +57,44 @@ namespace Trees
             //TODO #5: Return the total number of elements in this tree
             if (this != null)
             {
-            return (1 + Children.Count());
+                int total = 0;
+                for (int i = 0; i < Children.Count(); i++)
+                {
+                    total += Children.Get(i).Count();
+                }
+                return (total + 1);
             }
-            if (this.Children != null)
-            {
-                return Children.Count();
-            }
-            return Children.Count(); 
+            return 0;
         }
 
         public int Height()
         {
             //TODO #6: Return the height of this tree
-            if (RootNode == null)
+            int total = 0;
+            if (this.Children == null || Children.Count() == 0 )
             {
                 return 0;
             }
-            if (this.Children != null)
+            for (int i = 0; i < Children.Count(); i++)
             {
-                return (1 + this.Children.Height());
+                if (Children.Get(i).Height() > total)
+                {
+                    total = Children.Get(i).Height();
+                }
             }
-            return 0;   
+            return total+1;
+
+
         }
 
         public void Remove(T value)
         {
             //TODO #7: Remove the child node that has Value=value. Apply recursively
-            for (int i = 0; i < Children.Count(); i++)
+            if (Find(value) != null)
             {
-                if (this.Value.Equals(Children.Get(i)))
-                {
-                    Children.Remove(i);
-                }
+                Remove(Find(value));
             }
+            
         }
 
         public TreeNode<T> Find(T value)
@@ -100,9 +106,9 @@ namespace Trees
             }
             for (int i = 0; i < Children.Count(); i++)
             {
-                if (this.Value.Equals(Children.Get(i)))
+                if (Children.Get(i).Find(value) != null)
                 {
-                    return Children.Get(i);
+                    return Children.Get(i).Find(value);
                 }
             }
             return null;
@@ -114,11 +120,15 @@ namespace Trees
             //TODO #9: Same as #6, but this method is given the specific node to remove, not the value
             for (int i = 0; i < Children.Count(); i++)
             {
-                if (this.RootNode.Equals(Children.Get(i)))
+                if (node.Equals(Children.Get(i)))
                 {
                     Children.Remove(i);
                 }
-            };
+                else
+                {
+                    Children.Get(i).Remove(node);
+                }
+            }
         }
     }
 }
